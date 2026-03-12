@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>萃取时光 | 轻奢植物学咖啡指南</title>
+    <title>萃取时光 | 精品咖啡致尚指南</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -28,7 +28,7 @@
             font-weight: 300;
         }
 
-        /* 标题使用优雅的宋体 */
+        /* 标题使用优雅的衬线字体 */
         h1, h2, h3, h4, h5, .serif {
             font-family: 'Noto Serif SC', serif;
             font-weight: 400;
@@ -45,7 +45,7 @@
             z-index: 100; transition: var(--transition);
         }
         nav.scrolled { background: rgba(250, 250, 247, 0.95); backdrop-filter: blur(10px); padding: 15px 5%; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
-        .logo { font-size: 1.2rem; font-weight: 500; color: var(--text-main); letter-spacing: 2px; }
+        .logo { font-size: 1.2rem; font-weight: 500; color: var(--text-main); letter-spacing: 2px; text-transform: uppercase; }
         .logo span { color: var(--parrot-green); }
         .nav-links { display: none; gap: 40px; }
         .nav-links a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: var(--transition); }
@@ -119,6 +119,13 @@
         .feature-list li { padding: 15px 0; border-bottom: 1px solid rgba(26, 47, 36, 0.05); display: flex; justify-content: space-between; }
         .feature-list span:first-child { color: var(--gold-accent); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
 
+        /* --- 从树到杯的旅程 --- */
+        .journey-section { max-width: 1000px; }
+        .journey-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .journey-item { text-align: center; padding: 20px; border: 1px solid rgba(44, 181, 114, 0.1); transition: var(--transition); }
+        .journey-item:hover { background-color: white; border-color: var(--parrot-green); box-shadow: var(--card-shadow); }
+        .journey-icon { font-size: 2.5rem; color: var(--parrot-green); margin-bottom: 20px; display: inline-block; }
+
         /* --- 冲煮艺术 (左右交替排版) --- */
         .step-row { display: flex; flex-direction: column; gap: 40px; margin-bottom: 100px; align-items: center; }
         .step-img-box { width: 100%; height: 400px; position: relative; }
@@ -130,7 +137,7 @@
 
         /* --- 页脚 --- */
         footer { background: var(--text-main); color: var(--bg-color); padding: 80px 5% 40px; text-align: center; }
-        .footer-logo { font-family: 'Noto Serif SC', serif; font-size: 2rem; margin-bottom: 20px; }
+        .footer-logo { font-family: 'Noto Serif SC', serif; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; }
         .footer-logo span { color: var(--parrot-green); }
 
         /* --- 桌面端适配 --- */
@@ -142,6 +149,8 @@
             
             .beans-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
             .bean-card { padding: 80px 60px; }
+            
+            .journey-grid { grid-template-columns: repeat(5, 1fr); }
             
             .step-row { flex-direction: row; justify-content: space-between; gap: 80px; }
             .step-row:nth-child(even) { flex-direction: row-reverse; }
@@ -157,7 +166,7 @@
         <div class="nav-links">
             <a href="#origin">植物起源</a>
             <a href="#beans">豆种分类</a>
-            <a href="#brew">萃取美学</a>
+            <a href="#brew">匠心萃取</a>
         </div>
     </nav>
 
@@ -165,9 +174,9 @@
         <div class="hero-container reveal">
             <div class="hero-text">
                 <span class="section-subtitle">Botanical Extraction</span>
-                <h1>植物与水<i>的</i><br>萃取艺术</h1>
+                <h1>植物与水<i>的</i><br>匠心萃取</h1>
                 <div class="deco-line"></div>
-                <p>抛开工业化的喧嚣，用鹦鹉绿的清新与植物学的严谨，重新审视每一颗咖啡樱桃的生命轨迹。在静谧中，品味自然赋予的地域之味。</p>
+                <p>抛开工业化的喧嚣，用鹦鹉绿的清新与严谨的植物学视角，重新审视每一颗咖啡樱桃的生命轨迹。在静谧中，品味自然赋予的地域之味。</p>
                 <a href="#origin" class="btn">探索旅程 <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="hero-img-wrapper">
@@ -178,17 +187,17 @@
             </div>
         </div>
     </header>
-
+    
     <section id="beans">
         <div class="section-header reveal">
             <span class="section-subtitle">Coffea Genus</span>
-            <h2 class="section-title">核心豆种植物学</h2>
+            <h2 class="section-title">核心豆种分类</h2>
         </div>
         <div class="beans-grid">
             <div class="bean-card reveal">
                 <h3>阿拉比卡</h3>
                 <span class="botanical-name">Coffea arabica L.</span>
-                <p style="margin-bottom: 30px; font-size: 0.95rem; color: #4A5D53;">被誉为精品咖啡的皇冠。生长在凉爽的高海拔地带，拥有优雅复杂的芳香化合物，是探寻地域风味（Terroir）的唯一选择。</p>
+                <p style="margin-bottom: 30px; font-size: 0.95rem; color: #4A5D53;">精品咖啡的皇冠。生长在凉爽的高海拔地带，拥有优雅复杂的芳香化合物，是探寻地域风味（Terroir）的唯一选择。</p>
                 <ul class="feature-list">
                     <li><span>风味特征</span> <span>花香 / 浆果 / 焦糖</span></li>
                     <li><span>种植海拔</span> <span>800m - 2000m+</span></li>
@@ -211,7 +220,7 @@
     <section id="brew">
         <div class="section-header reveal">
             <span class="section-subtitle">The Ritual</span>
-            <h2 class="section-title">轻奢手冲萃取法</h2>
+            <h2 class="section-title">经典手冲指南</h2>
         </div>
 
         <div class="step-row reveal">
@@ -224,7 +233,7 @@
             <div class="step-text">
                 <div class="step-number">01</div>
                 <h3>粉水比例与研磨度</h3>
-                <p>科学的萃取始于严谨的计量。我们推荐使用 <strong>1:15</strong> 的黄金粉水比（20g 咖啡粉注入 300g 热水）。采用中等研磨度（类似粗海盐颗粒），以确保芳香物质的均匀析出，避免过度萃取带来的苦涩。</p>
+                <p>科学的萃取始于严谨的计量。我们推荐使用 <strong>1:15</strong> 的黄金粉水比（20g 咖啡粉注入 300g 热水）。采用中等研磨度（类似粗海盐颗粒），以确保芳香物质的均匀析出。</p>
             </div>
         </div>
 
@@ -237,14 +246,14 @@
             </div>
             <div class="step-text">
                 <div class="step-number">02</div>
-                <h3>奇妙的植物学焖蒸</h3>
-                <p>使用 90°C 的热水，以画圈方式注入 40g 水打湿粉床。此时静置 30 秒，你将观察到粉床如生命般膨胀——这是烘焙过程中锁在细胞壁内的二氧化碳被释放的过程，为后续深层风味的萃取打下基础。</p>
+                <h3>奇妙的植物化学反应</h3>
+                <p>使用 90°C 的热水，以画圈方式注入 40g 水打湿粉床。此时静置 30 秒，你将观察到粉床如生命般膨胀——这是烘焙过程中二氧化碳释放的过程，也是为深层风味萃取打下基础的关键一刻。</p>
             </div>
         </div>
 
         <div class="step-row reveal">
             <div class="step-img-box">
-                <img src="https://images.unsplash.com/photo-1544787210-2281404099d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                      alt="Pouring" 
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="hero-img-fallback">Step 03</div>
@@ -252,7 +261,7 @@
             <div class="step-text">
                 <div class="step-number">03</div>
                 <h3>水流的韵律与萃取</h3>
-                <p>保持水流纤细、垂直且稳定，由中心向外画同心圆。分两段将水注满至 300g。整个过程应在 2分30秒内完成。当滤杯中的水流尽，轻摇分享壶，一杯充满明亮酸质与馥郁花香的单品咖啡便诞生了。</p>
+                <p>保持水流纤细、垂直且稳定，由中心向外画同心圆。分两段将水注满至 300g。在 2分30秒内完成萃取，一杯充满明亮酸质与馥郁花香的单品咖啡便诞生了。</p>
             </div>
         </div>
     </section>
@@ -260,7 +269,7 @@
     <footer>
         <div class="footer-logo">BOTANY<span>.</span>COFFEE</div>
         <p style="font-size: 0.9rem; letter-spacing: 1px; color: rgba(255,255,255,0.6);">探索植物、时间与水的奇妙交融</p>
-        <p style="margin-top: 40px; font-size: 0.75rem; color: rgba(255,255,255,0.3);">© 2026 Crafted with Soft Luxury Botanical style.</p>
+        <p style="margin-top: 40px; font-size: 0.75rem; color: rgba(255,255,255,0.3);">© 2026 精心呈现</p>
     </footer>
 
     <script>
