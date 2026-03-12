@@ -47,9 +47,10 @@
             justify-content: center;
             color: white;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
-                        url('http://googleusercontent.com/image_collection/image_retrieval/2745038330139528711_0') center/cover no-repeat;
-            background-attachment: fixed; /* 视差效果 */
+            /* 使用了高质量的手冲咖啡全景图 */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            background-attachment: fixed; 
         }
         .hero-content h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; font-weight: 300; letter-spacing: 6px; }
         .hero-content p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; font-weight: 300; }
@@ -104,11 +105,13 @@
             width: 100%; 
             aspect-ratio: 1; 
             object-fit: cover; 
-            border-radius: 50%; /* 圆形图片更精致 */
+            border-radius: 50%; 
             margin-bottom: 15px;
             border: 5px solid white;
             box-shadow: var(--card-shadow);
+            transition: var(--transition);
         }
+        .equip-item:hover img { transform: scale(1.05); }
 
         /* 页脚 */
         footer {
@@ -165,7 +168,7 @@
             <div class="stat-card">
                 <i class="fas fa-vial stat-icon"></i>
                 <h4>粉水比 1:15</h4>
-                <p>这是公认的金杯平衡比例。20g咖啡粉配合300ml 纯净水，能确保浓郁度与风味层次共存。</p>
+                <p>这是公认的金杯平衡比例。20g咖啡粉配合300ml纯净水，能确保浓郁度与风味层次共存。</p>
             </div>
             <div class="stat-card">
                 <i class="fas fa-fire-alt stat-icon"></i>
@@ -185,29 +188,29 @@
         </div>
         
         <div class="step-card">
-            <div class="step-img" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/2745038330139528711_0')"></div>
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1559525839-b184a4d698c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
             <div class="step-info">
                 <span class="step-num">STEP 01</span>
                 <h4>精准称量与研磨</h4>
-                <p>选择新鲜烘焙的咖啡豆，研磨至中等粗细（如白砂糖大小）。均匀的研磨颗粒是成功萃取的基础。</p>
+                <p>选择新鲜烘焙的咖啡豆，研磨至中等粗细（如白砂糖大小）。均匀的研磨颗粒是成功萃取的基础，研磨过细容易苦涩，过粗则风味寡淡。</p>
             </div>
         </div>
 
         <div class="step-card">
-            <div class="step-img" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/13244153602917963282_0')"></div>
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1544787210-2281404099d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
             <div class="step-info">
                 <span class="step-num">STEP 02</span>
                 <h4>极具魔力的“焖蒸”</h4>
-                <p>注入约40g水充分润湿咖啡粉，静置30秒。看气体排出、粉床隆起，这决定了整杯咖啡的均匀度。</p>
+                <p>注入约40g水充分润湿咖啡粉，静置30秒。看气体排出、粉床如汉堡般隆起，这一步能打通内部通道，决定了整杯咖啡的均匀度。</p>
             </div>
         </div>
 
         <div class="step-card">
-            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1498804103079-a6351b050096?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
             <div class="step-info">
                 <span class="step-num">STEP 03</span>
                 <h4>稳定的分段注水</h4>
-                <p>由中心向外平稳绕圈，保持水位高度。水流要细而垂直，如同在粉床上轻柔起舞。</p>
+                <p>由中心向外平稳绕圈，保持水位高度。水流要细而垂直，如同在粉床上轻柔起舞。分两到三次将水注完，耐心等待滤液滴下。</p>
             </div>
         </div>
 
@@ -217,24 +220,24 @@
         </div>
         <div class="grid equip-grid">
             <div class="equip-item">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/683743261695408892_0" alt="Equipment">
-                <p><strong>V60 经典滤杯组</strong></p>
-                <small style="color: #999;">专业级萃取体验</small>
+                <img src="https://images.unsplash.com/photo-1542204625-78e23589b33a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="V60滤杯">
+                <p><strong>V60 经典滤杯</strong></p>
+                <small style="color: #999;">流畅的锥形萃取体验</small>
             </div>
             <div class="equip-item">
-                <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&q=80&w=400" alt="Grinder">
-                <p><strong>精密磨豆机</strong></p>
+                <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="磨豆机">
+                <p><strong>精密手摇磨豆机</strong></p>
                 <small style="color: #999;">风味的精准锁存</small>
             </div>
             <div class="equip-item">
-                <img src="https://images.unsplash.com/photo-1544787210-2281404099d2?auto=format&fit=crop&q=80&w=400" alt="Kettle">
+                <img src="https://images.unsplash.com/photo-1517701550927-30cfcb646067?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="手冲壶">
                 <p><strong>温控细口壶</strong></p>
-                <small style="color: #999;">水流的绝对掌控</small>
+                <small style="color: #999;">垂直水流的绝对掌控</small>
             </div>
             <div class="equip-item">
-                <img src="https://images.unsplash.com/photo-1621259182978-f09e5e2ca845?auto=format&fit=crop&q=80&w=400" alt="Scale">
+                <img src="https://images.unsplash.com/photo-1621259182978-f09e5e2ca845?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="电子秤">
                 <p><strong>高精度计时秤</strong></p>
-                <small style="color: #999;">数据的稳定保障</small>
+                <small style="color: #999;">稳定比例的数据保障</small>
             </div>
         </div>
     </div>
@@ -242,7 +245,7 @@
     <footer>
         <div class="footer-logo">萃取时光 | Brew Moment</div>
         <p>每一杯手冲，都是对生活的一次深情表白。</p>
-        <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">© 2026 Crafted with Passion. Images from Unsplash.</p>
+        <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">© 2026 Crafted with Passion.</p>
     </footer>
 
 </body>
