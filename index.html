@@ -3,972 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌿 咖啡植物学 | 奢华咖啡学院</title>
+    <title>萃取时光 | 手冲咖啡专业指南</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+SC:wght@300;400;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         :root {
-            --deep-green: #1a3a2a;
-            --forest-green: #2d5a3d;
-            --gold: #c9a962;
-            --gold-light: #e8d5a3;
-            --cream: #f9f6f0;
-            --cream-dark: #e8e4dc;
-            --brown: #4a3728;
+            --primary: #4e342e;    /* 深咖啡色 */
+            --accent: #c69c6d;     /* 柔和金棕色 */
+            --bg-light: #fdfaf7;   /* 极简米白 */
+            --text-dark: #2c1e1a;
+            --card-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        
+
+        /* 基础重置 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Noto Serif SC', 'Playfair Display', serif;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             line-height: 1.8;
-            color: var(--deep-green);
-            background: var(--cream);
         }
-        
-        /* ===== HERO SECTION ===== */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, var(--deep-green) 0%, var(--forest-green) 50%, #1a2a2a 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(201, 169, 98, 0.1) 0%, transparent 50%);
-            animation: shimmer 8s ease-in-out infinite;
-        }
-        
-        @keyframes shimmer {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-        
-        .hero-leaf {
-            position: absolute;
-            font-size: 20em;
-            opacity: 0.05;
-            color: var(--gold);
-            pointer-events: none;
-        }
-        .hero-leaf.top-left { top: -50px; left: -50px; transform: rotate(-30deg); }
-        .hero-leaf.top-right { top: -50px; right: -50px; transform: rotate(30deg) scaleX(-1); }
-        .hero-leaf.bottom-left { bottom: -50px; left: -50px; transform: rotate(60deg); }
-        .hero-leaf.bottom-right { bottom: -50px; right: -50px; transform: rotate(120deg) scaleX(-1); }
-        
-        .hero-content {
-            z-index: 10;
-            padding: 40px;
-        }
-        
-        .hero-logo {
-            font-size: 8em;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 30px rgba(201, 169, 98, 0.5));
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .hero h1 {
-            font-family: 'Playfair Display', 'Noto Serif SC', serif;
-            font-size: 5em;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: 0.1em;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.8em;
-            color: var(--cream);
-            font-style: italic;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .hero-ornament {
-            font-size: 2em;
-            color: var(--gold);
-            margin: 30px 0;
-            opacity: 0.8;
-        }
-        
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--gold);
-            font-size: 1.2em;
-            animation: bounce 2s ease-in-out infinite;
-            cursor: pointer;
-            z-index: 10;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(15px); }
-        }
-        
-        /* ===== NAVIGATION ===== */
+
+        /* 导航栏 */
         nav {
-            background: var(--deep-green);
-            padding: 20px;
+            padding: 15px 5%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
-            z-index: 100;
-            border-bottom: 3px solid var(--gold);
-        }
-        nav ul {
-            list-style: none;
+            z-index: 1000;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+        }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+
+        /* 顶部大图区 */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-        nav a {
-            color: var(--gold);
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 500;
-            padding: 10px 20px;
-            border: 1px solid transparent;
-            transition: all 0.3s;
-            letter-spacing: 0.05em;
-        }
-        nav a:hover {
-            border-color: var(--gold);
-            background: rgba(201, 169, 98, 0.1);
-        }
-        
-        /* ===== MAIN CONTENT ===== */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 40px;
-        }
-        
-        section {
-            margin-bottom: 100px;
-        }
-        
-        .section-header {
+            color: white;
             text-align: center;
-            margin-bottom: 60px;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
+                        url('http://googleusercontent.com/image_collection/image_retrieval/2745038330139528711_0') center/cover no-repeat;
+            background-attachment: fixed; /* 视差效果 */
         }
+        .hero-content h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; font-weight: 300; letter-spacing: 6px; }
+        .hero-content p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; font-weight: 300; }
+
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 60px 0; }
+
+        /* 标题样式 */
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h3 { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+        .section-title .divider { width: 40px; height: 3px; background: var(--accent); margin: 0 auto; }
+
+        /* 参数卡片 */
+        .grid { display: grid; gap: 30px; margin-bottom: 80px; }
+        .stats-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         
-        h2 {
-            font-family: 'Playfair Display', 'Noto Serif SC', serif;
-            font-size: 3em;
-            color: var(--deep-green);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-header h2::after {
-            content: '🌿';
-            display: block;
-            font-size: 1.5em;
-            margin-top: 20px;
-            color: var(--gold);
-        }
-        
-        .section-subtitle {
-            font-size: 1.3em;
-            color: var(--forest-green);
-            font-style: italic;
-        }
-        
-        /* ===== COFFEE METHODS ===== */
-        .methods-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 40px;
-        }
-        
-        .method-card {
+        .stat-card {
             background: white;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(26, 58, 42, 0.15);
-            transition: all 0.4s ease;
-            border: 1px solid var(--cream-dark);
-            position: relative;
-        }
-        
-        .method-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
-        }
-        
-        .method-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(26, 58, 42, 0.25);
-        }
-        
-        .method-header {
-            background: linear-gradient(135deg, var(--forest-green) 0%, var(--deep-green) 100%);
-            color: var(--cream);
-            padding: 40px 30px;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
         }
-        
-        .method-header::after {
-            content: '🌿';
-            position: absolute;
-            font-size: 8em;
-            opacity: 0.1;
-            top: -20px;
-            right: -20px;
-        }
-        
-        .method-icon {
-            font-size: 5em;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .method-header h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            margin-bottom: 8px;
-            color: var(--gold);
-        }
-        
-        .method-header p {
-            font-style: italic;
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-        
-        .method-body {
-            padding: 35px;
-        }
-        
-        .method-body p {
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            color: var(--brown);
-        }
-        
-        .method-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .spec-item {
-            background: var(--cream);
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 3px solid var(--gold);
-        }
-        
-        .spec-label {
-            font-size: 0.85em;
-            color: var(--forest-green);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 5px;
-        }
-        
-        .spec-value {
-            font-size: 1.1em;
-            color: var(--deep-green);
-            font-weight: 600;
-        }
-        
-        .difficulty {
-            display: inline-block;
-            padding: 8px 25px;
-            border-radius: 25px;
-            font-size: 0.95em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .difficulty.easy { 
-            background: linear-gradient(135deg, #d4edda, #c3e6cb); 
-            color: #155724;
-            border: 1px solid #28a745;
-        }
-        .difficulty.medium { 
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7); 
-            color: #856404;
-            border: 1px solid #ffc107;
-        }
-        .difficulty.hard { 
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb); 
-            color: #721c24;
-            border: 1px solid #dc3545;
-        }
-        
-        /* ===== STEPS SECTION ===== */
-        .steps-section {
-            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
-            border-radius: 10px;
-            padding: 60px;
-            border: 2px solid var(--gold);
-            position: relative;
-        }
-        
-        .steps-section::before {
-            content: '🌿';
-            position: absolute;
-            font-size: 15em;
-            opacity: 0.03;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .step {
+        .stat-card:hover { transform: translateY(-10px); }
+        .stat-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+
+        /* 详细步骤图文 */
+        .step-card {
             display: flex;
-            gap: 30px;
+            flex-direction: column;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
             margin-bottom: 40px;
-            padding-bottom: 40px;
-            border-bottom: 2px dashed var(--cream-dark);
-            position: relative;
+            transition: var(--transition);
         }
-        
-        .step:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        .step-img {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
         }
-        
-        .step-number {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-            color: var(--deep-green);
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            font-weight: bold;
-            flex-shrink: 0;
-            box-shadow: 0 5px 20px rgba(201, 169, 98, 0.4);
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .step-content {
-            flex: 1;
-        }
-        
-        .step-content h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--deep-green);
-            font-size: 1.6em;
+        .step-info { padding: 40px; }
+        .step-num { color: var(--accent); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+        .step-info h4 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary); }
+
+        /* 器具展示 */
+        .equip-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        .equip-item { text-align: center; }
+        .equip-item img { 
+            width: 100%; 
+            aspect-ratio: 1; 
+            object-fit: cover; 
+            border-radius: 50%; /* 圆形图片更精致 */
             margin-bottom: 15px;
+            border: 5px solid white;
+            box-shadow: var(--card-shadow);
         }
-        
-        .step-content p {
-            font-size: 1.15em;
-            color: var(--brown);
-            line-height: 1.9;
-        }
-        
-        /* ===== EQUIPMENT ===== */
-        .equipment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-        }
-        
-        .equipment-item {
-            text-align: center;
-            padding: 40px 25px;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 5px 25px rgba(26, 58, 42, 0.1);
-            transition: all 0.3s;
-            border: 1px solid var(--cream-dark);
-        }
-        
-        .equipment-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 35px rgba(26, 58, 42, 0.2);
-            border-color: var(--gold);
-        }
-        
-        .equipment-item .icon {
-            font-size: 4.5em;
-            margin-bottom: 20px;
-            display: block;
-        }
-        
-        .equipment-item h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--deep-green);
-            font-size: 1.4em;
-            margin-bottom: 10px;
-        }
-        
-        .equipment-item p {
-            color: var(--brown);
-            font-size: 1em;
-        }
-        
-        /* ===== TIPS SECTION ===== */
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .tip-card {
-            background: linear-gradient(135deg, white 0%, var(--cream) 100%);
-            border-left: 5px solid var(--gold);
-            padding: 35px;
-            border-radius: 5px;
-            box-shadow: 0 5px 25px rgba(26, 58, 42, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .tip-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 35px rgba(26, 58, 42, 0.2);
-        }
-        
-        .tip-card h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--deep-green);
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .tip-card p {
-            color: var(--brown);
-            line-height: 1.9;
-            font-size: 1.05em;
-        }
-        
-        /* ===== FOOTER ===== */
+
+        /* 页脚 */
         footer {
-            background: linear-gradient(135deg, var(--deep-green) 0%, #0a1a1a 100%);
-            color: var(--cream);
+            background: var(--primary);
+            color: rgba(255,255,255,0.6);
+            padding: 80px 5% 40px;
             text-align: center;
-            padding: 60px 40px;
-            margin-top: 100px;
-            position: relative;
-            overflow: hidden;
         }
-        
-        footer::before {
-            content: '🌿';
-            position: absolute;
-            font-size: 20em;
-            opacity: 0.03;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .footer-logo { color: white; font-size: 1.5rem; margin-bottom: 30px; }
+
+        /* 响应式适配 */
+        @media (min-width: 900px) {
+            .step-card { flex-direction: row; align-items: stretch; height: 400px; }
+            .step-card:nth-child(even) { flex-direction: row-reverse; }
+            .step-img { width: 50%; height: auto; }
+            .step-info { width: 50%; display: flex; flex-direction: column; justify-content: center; padding: 60px; }
         }
-        
-        footer .footer-ornament {
-            font-size: 2em;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-        
-        footer h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            color: var(--gold);
-            margin-bottom: 15px;
-        }
-        
-        footer p {
-            opacity: 0.8;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-        
-        .footer-note {
-            margin-top: 30px;
-            font-size: 0.9em;
-            opacity: 0.6;
-            font-style: italic;
-        }
-        
-        /* ===== BUTTON ===== */
-        .btn-luxury {
+
+        .cta-btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-            color: var(--deep-green);
-            padding: 18px 50px;
-            border-radius: 50px;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: white;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2em;
-            transition: all 0.4s;
+            border-radius: 50px;
             margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(201, 169, 98, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border: 2px solid var(--gold);
+            font-weight: 600;
+            transition: var(--transition);
         }
-        
-        .btn-luxury:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(201, 169, 98, 0.6);
-        }
-        
-        /* ===== DECORATIVE DIVIDERS ===== */
-        .divider {
-            text-align: center;
-            font-size: 2em;
-            color: var(--gold);
-            margin: 60px 0;
-            opacity: 0.6;
-        }
+        .cta-btn:hover { background: #b58b5d; transform: scale(1.05); }
     </style>
 </head>
 <body>
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <span class="hero-leaf top-left">🌿</span>
-        <span class="hero-leaf top-right">🌿</span>
-        <span class="hero-leaf bottom-left">🌿</span>
-        <span class="hero-leaf bottom-right">🌿</span>
-        
-        <div class="hero-content">
-            <div class="hero-logo">☕</div>
-            <h1>咖啡植物学</h1>
-            <p class="hero-subtitle">The Botany of Coffee</p>
-            <div class="hero-ornament">❧ ❦ ❧</div>
-            <p style="color: var(--cream); font-size: 1.2em; max-width: 600px; margin: 0 auto; line-height: 1.8;">
-                探索咖啡的植物学奥秘，从种子到杯子的奢华旅程<br>
-                掌握精品咖啡的艺术与科学
-            </p>
-            <a href="#methods" class="btn-luxury">开启旅程</a>
-        </div>
-        
-        <div class="scroll-indicator" onclick="document.getElementById('methods').scrollIntoView({behavior: 'smooth'})">
-            ↓ 向下探索 ↓
-        </div>
-    </section>
-    
-    <!-- NAVIGATION -->
+
     <nav>
-        <ul>
-            <li><a href="#methods">冲泡艺术</a></li>
-            <li><a href="#steps">制作指南</a></li>
-            <li><a href="#equipment">器具精选</a></li>
-            <li><a href="#tips">大师技巧</a></li>
-        </ul>
+        <div class="logo"><i class="fas fa-coffee"></i> 萃取时光</div>
+        <div style="font-size: 0.8rem; letter-spacing: 1px; color: var(--accent);">BREW MOMENT</div>
     </nav>
-    
-    <div class="container">
-        <!-- COFFEE METHODS -->
-        <section id="methods">
-            <div class="section-header">
-                <h2>六大冲泡艺术</h2>
-                <p class="section-subtitle">Six Brewing Methods of Excellence</p>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h2>慢慢冲，去感受</h2>
+            <p>在这个快进的时代，我们用三分钟的专注，<br>还原一颗咖啡豆最本质的地域风味。</p>
+            <a href="#guide" class="cta-btn">开启味蕾之旅</a>
+        </div>
+    </header>
+
+    <div class="container" id="guide">
+        <div class="section-title">
+            <h3>冲煮核心参数</h3>
+            <div class="divider"></div>
+        </div>
+        <div class="grid stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-vial stat-icon"></i>
+                <h4>粉水比 1:15</h4>
+                <p>这是公认的金杯平衡比例。20g咖啡粉配合300ml 纯净水，能确保浓郁度与风味层次共存。</p>
             </div>
-            
-            <div class="methods-grid">
-                <!-- Pour Over -->
-                <div class="method-card">
-                    <div class="method-header">
-                        <span class="method-icon">☕</span>
-                        <h3>手冲咖啡</h3>
-                        <p>Pour Over</p>
-                    </div>
-                    <div class="method-body">
-                        <p>最经典的精品咖啡冲泡方式，能完美展现咖啡豆的风味层次与产地特色。</p>
-                        <div class="method-specs">
-                            <div class="spec-item">
-                                <div class="spec-label">⏱️ 时间</div>
-                                <div class="spec-value">3-4 分钟</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🌡️ 水温</div>
-                                <div class="spec-value">90-96°C</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">⚖️ 粉水比</div>
-                                <div class="spec-value">1:15-1:17</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🔬 研磨度</div>
-                                <div class="spec-value">中细研磨</div>
-                            </div>
-                        </div>
-                        <span class="difficulty medium">中等难度</span>
-                    </div>
-                </div>
-                
-                <!-- Espresso -->
-                <div class="method-card">
-                    <div class="method-header">
-                        <span class="method-icon">🔥</span>
-                        <h3>意式浓缩</h3>
-                        <p>Espresso</p>
-                    </div>
-                    <div class="method-body">
-                        <p>高压萃取的浓郁咖啡，是所有花式咖啡的基础，考验技术与设备的极致配合。</p>
-                        <div class="method-specs">
-                            <div class="spec-item">
-                                <div class="spec-label">⏱️ 时间</div>
-                                <div class="spec-value">25-30 秒</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🌡️ 水温</div>
-                                <div class="spec-value">92-96°C</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">⚖️ 粉液比</div>
-                                <div class="spec-value">1:2</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🔬 研磨度</div>
-                                <div class="spec-value">极细研磨</div>
-                            </div>
-                        </div>
-                        <span class="difficulty hard">高难度</span>
-                    </div>
-                </div>
-                
-                <!-- French Press -->
-                <div class="method-card">
-                    <div class="method-header">
-                        <span class="method-icon">🫖</span>
-                        <h3>法压壶</h3>
-                        <p>French Press</p>
-                    </div>
-                    <div class="method-body">
-                        <p>最简单纯粹的冲泡方式，保留咖啡完整油脂和醇厚口感，适合深度烘焙豆。</p>
-                        <div class="method-specs">
-                            <div class="spec-item">
-                                <div class="spec-label">⏱️ 时间</div>
-                                <div class="spec-value">4 分钟</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🌡️ 水温</div>
-                                <div class="spec-value">93-96°C</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">⚖️ 粉水比</div>
-                                <div class="spec-value">1:15</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🔬 研磨度</div>
-                                <div class="spec-value">粗研磨</div>
-                            </div>
-                        </div>
-                        <span class="difficulty easy">简单</span>
-                    </div>
-                </div>
-                
-                <!-- Cold Brew -->
-                <div class="method-card">
-                    <div class="method-header">
-                        <span class="method-icon">🧊</span>
-                        <h3>冷萃咖啡</h3>
-                        <p>Cold Brew</p>
-                    </div>
-                    <div class="method-body">
-                        <p>低温长时间萃取，口感如丝绸般顺滑，酸度极低，夏日必备的健康选择。</p>
-                        <div class="method-specs">
-                            <div class="spec-item">
-                                <div class="spec-label">⏱️ 时间</div>
-                                <div class="spec-value">12-24 小时</div>
-                            </div>
-                            <div class="spec-label">🌡️ 水温</div>
-                            <div class="spec-value">室温/冷藏</div>
-                            <div class="spec-item">
-                                <div class="spec-label">⚖️ 粉水比</div>
-                                <div class="spec-value">1:8 (浓缩)</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🔬 研磨度</div>
-                                <div class="spec-value">粗研磨</div>
-                            </div>
-                        </div>
-                        <span class="difficulty easy">简单</span>
-                    </div>
-                </div>
-                
-                <!-- AeroPress -->
-                <div class="method-card">
-                    <div class="method-header">
-                        <span class="method-icon">💪</span>
-                        <h3>爱乐压</h3>
-                        <p>AeroPress</p>
-                    </div>
-                    <div class="method-body">
-                        <p>多功能便携器具，结合浸泡与压力萃取，可制作从浓缩到美式的各种风味。</p>
-                        <div class="method-specs">
-                            <div class="spec-item">
-                                <div class="spec-label">⏱️ 时间</div>
-                                <div class="spec-value">1-2 分钟</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🌡️ 水温</div>
-                                <div class="spec-value">80-96°C</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">⚖️ 粉水比</div>
-                                <div class="spec-value">1:12-1:16</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🔬 研磨度</div>
-                                <div class="spec-value">中细研磨</div>
-                            </div>
-                        </div>
-                        <span class="difficulty medium">中等难度</span>
-                    </div>
-                </div>
-                
-                <!-- Moka Pot -->
-                <div class="method-card">
-                    <div class="method-header">
-                        <span class="method-icon">🏺</span>
-                        <h3>摩卡壶</h3>
-                        <p>Moka Pot</p>
-                    </div>
-                    <div class="method-body">
-                        <p>意大利家庭经典器具，利用蒸汽压力制作浓郁咖啡，充满复古情怀与仪式感。</p>
-                        <div class="method-specs">
-                            <div class="spec-item">
-                                <div class="spec-label">⏱️ 时间</div>
-                                <div class="spec-value">4-5 分钟</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🌡️ 水温</div>
-                                <div class="spec-value">炉火加热</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">⚖️ 粉水比</div>
-                                <div class="spec-value">1:10</div>
-                            </div>
-                            <div class="spec-item">
-                                <div class="spec-label">🔬 研磨度</div>
-                                <div class="spec-value">细研磨</div>
-                            </div>
-                        </div>
-                        <span class="difficulty medium">中等难度</span>
-                    </div>
-                </div>
+            <div class="stat-card">
+                <i class="fas fa-fire-alt stat-icon"></i>
+                <h4>水温 90°C</h4>
+                <p>水温是萃取的动力。针对中浅烘焙，90度左右的热水能有效萃取迷人的果酸与花香。</p>
             </div>
-        </section>
+            <div class="stat-card">
+                <i class="fas fa-clock stat-icon"></i>
+                <h4>时长 150s</h4>
+                <p>从第一滴水接触咖啡粉开始，建议在2分30秒内结束萃取，避免过苦的杂质析出。</p>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h3>冲煮四部曲</h3>
+            <div class="divider"></div>
+        </div>
         
-        <div class="divider">❧ ❦ ❧</div>
-        
-        <!-- STEPS SECTION -->
-        <section id="steps">
-            <div class="section-header">
-                <h2>手冲咖啡八步法</h2>
-                <p class="section-subtitle">The Eight Steps to Perfection</p>
+        <div class="step-card">
+            <div class="step-img" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/2745038330139528711_0')"></div>
+            <div class="step-info">
+                <span class="step-num">STEP 01</span>
+                <h4>精准称量与研磨</h4>
+                <p>选择新鲜烘焙的咖啡豆，研磨至中等粗细（如白砂糖大小）。均匀的研磨颗粒是成功萃取的基础。</p>
             </div>
-            
-            <div class="steps-section">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>准备器具与咖啡豆</h3>
-                        <p>准备好手冲壶、滤杯、滤纸、分享壶、电子秤、温度计。选择新鲜烘焙的咖啡豆（建议烘焙后 7-30 天内），这是好咖啡的起点。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>精确称豆与研磨</h3>
-                        <p>称取 20g 咖啡豆，研磨成白砂糖大小的颗粒（中细研磨）。研磨后应立即冲泡，避免香气挥发和氧化影响风味。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>润湿滤纸与温杯</h3>
-                        <p>将滤纸放入滤杯，用 95°C 热水均匀润湿，去除纸味并预热器具。倒掉分享壶中的水，避免稀释咖啡。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>倒入咖啡粉并整平</h3>
-                        <p>将咖啡粉倒入滤杯，轻拍使表面平整。在粉床中间挖一个小坑，有助于均匀萃取。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>第一次注水 · 闷蒸</h3>
-                        <p>注入 40g 热水（约粉量的 2 倍），均匀浸湿所有咖啡粉。等待 30-45 秒，让咖啡粉释放二氧化碳，这是萃取的关键。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h3>第二次注水 · 中心画圈</h3>
-                        <p>从中心开始，以小圈方式缓慢向外注水至 200g。水流要细而稳定，避免直接冲击滤纸边缘。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">7</div>
-                    <div class="step-content">
-                        <h3>第三次注水 · 完成萃取</h3>
-                        <p>继续注水至 300-340g（粉水比 1:15-1:17）。待水完全滤下，总时间控制在 3-4 分钟内完成萃取。</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">8</div>
-                    <div class="step-content">
-                        <h3>轻轻摇晃与品鉴</h3>
-                        <p>轻轻摇晃分享壶使咖啡液均匀，倒入预热好的咖啡杯。先闻香，再小口品尝，感受前中后调的风味变化。</p>
-                    </div>
-                </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-img" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/13244153602917963282_0')"></div>
+            <div class="step-info">
+                <span class="step-num">STEP 02</span>
+                <h4>极具魔力的“焖蒸”</h4>
+                <p>注入约40g水充分润湿咖啡粉，静置30秒。看气体排出、粉床隆起，这决定了整杯咖啡的均匀度。</p>
             </div>
-        </section>
-        
-        <div class="divider">❧ ❦ ❧</div>
-        
-        <!-- EQUIPMENT SECTION -->
-        <section id="equipment">
-            <div class="section-header">
-                <h2>器具精选</h2>
-                <p class="section-subtitle">Essential Equipment Collection</p>
+        </div>
+
+        <div class="step-card">
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-info">
+                <span class="step-num">STEP 03</span>
+                <h4>稳定的分段注水</h4>
+                <p>由中心向外平稳绕圈，保持水位高度。水流要细而垂直，如同在粉床上轻柔起舞。</p>
             </div>
-            
-            <div class="equipment-grid">
-                <div class="equipment-item">
-                    <span class="icon">⚖️</span>
-                    <h4>精密电子秤</h4>
-                    <p>精确到 0.1g，确保每次冲泡参数一致</p>
-                </div>
-                <div class="equipment-item">
-                    <span class="icon">🫖</span>
-                    <h4>鹅颈手冲壶</h4>
-                    <p>精准控制水流速度与方向</p>
-                </div>
-                <div class="equipment-item">
-                    <span class="icon">🔽</span>
-                    <h4>V60 滤杯</h4>
-                    <p>螺旋纹路设计，萃取更均匀</p>
-                </div>
-                <div class="equipment-item">
-                    <span class="icon">📄</span>
-                    <h4>无漂白滤纸</h4>
-                    <p>天然原浆，不影响咖啡风味</p>
-                </div>
-                <div class="equipment-item">
-                    <span class="icon">☕</span>
-                    <h4>锥刀磨豆机</h4>
-                    <p>均匀研磨，保留咖啡香气</p>
-                </div>
-                <div class="equipment-item">
-                    <span class="icon">🌡️</span>
-                    <h4>数字温度计</h4>
-                    <p>实时监控，确保最佳水温</p>
-                </div>
-                <div class="equipment-item">
-                    <span class="icon">🫙</span>
-                    <h4>玻璃分享壶</h4>
-                    <p>耐热玻璃，便于观察咖啡液</p>
-                </div>
-                <div class="equipment-item">
-                    <span class="icon">⏱️</span>
-                    <h4>智能计时器</h4>
-                    <p>精准计时，掌控萃取节奏</p>
-                </div>
+        </div>
+
+        <div class="section-title" style="margin-top: 80px;">
+            <h3>专业器具推荐</h3>
+            <div class="divider"></div>
+        </div>
+        <div class="grid equip-grid">
+            <div class="equip-item">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/683743261695408892_0" alt="Equipment">
+                <p><strong>V60 经典滤杯组</strong></p>
+                <small style="color: #999;">专业级萃取体验</small>
             </div>
-        </section>
-        
-        <div class="divider">❧ ❦ ❧</div>
-        
-        <!-- TIPS SECTION -->
-        <section id="tips">
-            <div class="section-header">
-                <h2>大师技巧</h2>
-                <p class="section-subtitle">Master's Tips & Secrets</p>
+            <div class="equip-item">
+                <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&q=80&w=400" alt="Grinder">
+                <p><strong>精密磨豆机</strong></p>
+                <small style="color: #999;">风味的精准锁存</small>
             </div>
-            
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h4>🌡️ 水温控制艺术</h4>
-                    <p>浅烘豆用高温（93-96°C）激发花果香，深烘豆用低温（85-90°C）避免焦苦。水温每差 5°C，风味截然不同。</p>
-                </div>
-                <div class="tip-card">
-                    <h4>⚖️ 黄金粉水比例</h4>
-                    <p>从 1:15 开始尝试，喜欢浓郁用 1:13，偏好清淡用 1:17。记录每次比例，找到你的专属配方。</p>
-                </div>
-                <div class="tip-card">
-                    <h4>🔄 研磨度精细调整</h4>
-                    <p>萃取太快（&lt;3 分钟）→ 调细研磨；萃取太慢（&gt;4 分钟）→ 调粗研磨。目标是稳定在 3-4 分钟完成。</p>
-                </div>
-                <div class="tip-card">
-                    <h4>💧 水质决定上限</h4>
-                    <p>使用过滤水或瓶装水，TDS 在 100-150ppm 最佳。硬水会产生水垢，软水萃取不足，中庸之道最好。</p>
-                </div>
-                <div class="tip-card">
-                    <h4>📦 咖啡豆保存法则</h4>
-                    <p>密封、避光、阴凉处保存，使用单向排气阀袋。切勿放冰箱（会受潮吸味）。开封后 2 周内饮用最佳。</p>
-                </div>
-                <div class="tip-card">
-                    <h4>👃 闻香品鉴之道</h4>
-                    <p>好的咖啡有层次：干香（研磨后）、湿香（注水后）、杯香（冲泡后）。花香、果香、坚果、巧克力，细细品味。</p>
-                </div>
-                <div class="tip-card">
-                    <h4>🧼 器具清洁保养</h4>
-                    <p>每次用完立即清洗，咖啡油残留会氧化变质。磨豆机每月深度清洁一次，保证研磨品质稳定。</p>
-                </div>
-                <div class="tip-card">
-                    <h4>📝 建立冲泡日志</h4>
-                    <p>记录每次的粉量、水量、水温、时间、研磨度、风味评价。这是成为高手的必经之路，也是复刻美味的钥匙。</p>
-                </div>
+            <div class="equip-item">
+                <img src="https://images.unsplash.com/photo-1544787210-2281404099d2?auto=format&fit=crop&q=80&w=400" alt="Kettle">
+                <p><strong>温控细口壶</strong></p>
+                <small style="color: #999;">水流的绝对掌控</small>
             </div>
-        </section>
-        
-        <div style="text-align: center; margin-top: 60px;">
-            <a href="#methods" class="btn-luxury">重新开始旅程</a>
+            <div class="equip-item">
+                <img src="https://images.unsplash.com/photo-1621259182978-f09e5e2ca845?auto=format&fit=crop&q=80&w=400" alt="Scale">
+                <p><strong>高精度计时秤</strong></p>
+                <small style="color: #999;">数据的稳定保障</small>
+            </div>
         </div>
     </div>
-    
-    <!-- FOOTER -->
+
     <footer>
-        <div class="footer-ornament">❧ ❦ ❧</div>
-        <h3>🌿 咖啡植物学</h3>
-        <p>The Botany of Coffee © 2026</p>
-        <p>让每个人都能做出一杯有灵魂的好咖啡</p>
-        <p class="footer-note">本网页为本地教学演示 · 数据仅供参考 · 愿咖啡与你同在</p>
+        <div class="footer-logo">萃取时光 | Brew Moment</div>
+        <p>每一杯手冲，都是对生活的一次深情表白。</p>
+        <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">© 2026 Crafted with Passion. Images from Unsplash.</p>
     </footer>
+
 </body>
 </html>
