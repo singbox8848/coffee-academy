@@ -3,354 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>萃取时光 | 精品咖啡植物学指南</title>
+    <title>萃取时光 | 轻奢植物学咖啡指南</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1A4335;    /* 深邃墨绿 (用于文字、深色底) */
-            --accent: #D4AF37;     /* 奢华金 (用于强调、边框、图标) */
-            --parrot-green: #2CB572; /* 活力鹦鹉绿 (主题色、高亮) */
-            --bg-light: #fefcf9;   /* 极简羊皮纸白 (背景) */
-            --text-dark: #1A4335;
-            --text-muted: #6F8F7F; /* 柔和苔绿 (副标题) */
-            --card-shadow: 0 20px 40px rgba(26, 67, 53, 0.04); /* 墨绿系柔和阴影 */
-            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --bg-color: #FAFAF7;       /* 极简羊皮纸白 */
+            --text-main: #1A2F24;      /* 深邃森林绿 (替代纯黑) */
+            --parrot-green: #2CB572;   /* 活力鹦鹉绿 */
+            --parrot-dark: #1e824c;    /* 暗调鹦鹉绿 */
+            --gold-accent: #C5A059;    /* 哑光轻奢金 */
+            --surface: #FFFFFF;
+            --transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'SimSun', sans-serif; /* 选用更具书卷气的字体 */
-            color: var(--text-dark);
+            font-family: 'Montserrat', 'PingFang SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.8;
             overflow-x: hidden;
-            letter-spacing: 0.5px;
-            
-            /* 纯 CSS 绘制的极淡植物学叶片纹理背景 (无外部图片) */
-            background-color: var(--bg-light);
-            background-image:
-              radial-gradient(var(--parrot-green) 1px, transparent 1px),
-              radial-gradient(var(--parrot-green) 1px, var(--bg-light) 1px);
-            background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
-            background-blend-mode: soft-light; /* 使其极其低调 */
+            font-weight: 300;
         }
 
-        /* 导航栏 */
+        /* 标题使用优雅的宋体 */
+        h1, h2, h3, h4, h5, .serif {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 400;
+        }
+
+        /* --- 滚动加载动效 --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- 导航栏 --- */
         nav {
-            padding: 15px 5%;
-            background: rgba(254,252,249,0.96);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f2e9de; /* 极细金色底边 */
+            position: fixed; top: 0; width: 100%; padding: 25px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; transition: var(--transition);
         }
-        .logo { font-size: 1.3rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-        .logo i { color: var(--accent); } /* Logo图标使用金色 */
-        .nav-links { display: none; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.9rem; transition: var(--transition); position: relative; }
+        nav.scrolled { background: rgba(250, 250, 247, 0.95); backdrop-filter: blur(10px); padding: 15px 5%; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
+        .logo { font-size: 1.2rem; font-weight: 500; color: var(--text-main); letter-spacing: 2px; }
+        .logo span { color: var(--parrot-green); }
+        .nav-links { display: none; gap: 40px; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: var(--transition); }
         .nav-links a:hover { color: var(--parrot-green); }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
-            background: var(--accent); transition: var(--transition);
-        }
-        .nav-links a:hover::after { width: 100%; }
 
-        /* 动态鹦鹉绿渐变主视觉 */
+        /* --- 主视觉 Hero 区 (错位排版) --- */
         .hero {
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            /* 渐变色调调整为鹦鹉绿与深墨绿的交融 */
-            background: linear-gradient(-45deg, #0f2e24, #1A4335, #2CB572, #3B7A57);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            position: relative;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 120px 5% 50px; position: relative;
         }
-        /* 纯 CSS 绘制的轻奢植物纹理叠加在 Hero 区 */
-        .hero::before {
-            content: "\f06c"; /* FontAwesome leaf icon */
-            font-family: 'Font Awesome 6 Free'; font-weight: 900;
-            position: absolute; bottom: 20px; right: 5%;
-            font-size: 8rem; color: rgba(255,255,255,0.05);
-            transform: rotate(-15deg);
+        .hero-container {
+            display: flex; flex-direction: column; max-width: 1200px; width: 100%; position: relative;
         }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .hero-text { z-index: 2; margin-top: 50px; }
+        .hero-text h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1; margin-bottom: 20px; color: var(--text-main); }
+        .hero-text h1 i { color: var(--parrot-green); font-style: normal; }
+        .hero-text p { font-size: 1.1rem; max-width: 450px; color: #4A5D53; margin-bottom: 40px; }
+        
+        .hero-img-wrapper {
+            position: relative; width: 100%; height: 50vh; margin-top: 30px;
         }
-        .hero-content h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px; font-weight: 300; letter-spacing: 8px; }
-        .hero-content p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; font-weight: 300; }
-
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 80px 0; }
-
-        /* 通用标题 */
-        .section-title { text-align: center; margin-bottom: 70px; }
-        .section-title h3 { font-size: 2.2rem; color: var(--primary); margin-bottom: 15px; font-weight: 600; letter-spacing: 2px; }
-        .section-title .divider { width: 50px; height: 2px; background: var(--accent); margin: 0 auto; } /* 金色细分割线 */
-
-        /* === 1. 咖啡历史时间轴 === */
-        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding-left: 30px; border-left: 1px solid #eae1d8; }
-        .timeline-item { position: relative; margin-bottom: 50px; }
-        .timeline-icon {
-            position: absolute; left: -50px; top: 0; width: 40px; height: 40px;
-            background: var(--accent); color: white; border-radius: 50%; /* 金色圆形图标 */
-            display: flex; align-items: center; justify-content: center; font-size: 1rem;
-            box-shadow: 0 0 0 5px var(--bg-light);
+        .hero-img {
+            width: 100%; height: 100%; object-fit: cover;
         }
-        .timeline-content { background: white; padding: 30px; border-radius: 12px; box-shadow: var(--card-shadow); border: 1px solid rgba(212,175,55,0.1); } /* 极细金边卡片 */
-        .timeline-content h4 { color: var(--primary); font-size: 1.3rem; margin-bottom: 10px; }
-        .timeline-date { color: var(--accent); font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; display: inline-block; padding-bottom: 5px; border-bottom: 1px solid #f2e9de; }
-
-        /* === 2. 两大豆种对比 (轻奢植物学风格卡片) === */
-        .beans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .bean-card {
-            background: white; border-radius: 20px; padding: 60px 40px; text-align: center;
-            box-shadow: var(--card-shadow); border-top: 5px solid transparent; transition: var(--transition);
+        .hero-img-fallback {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--parrot-dark), var(--text-main));
+            display: none; align-items: center; justify-content: center; color: white; font-family: 'Noto Serif SC', serif; font-size: 2rem;
         }
-        /* 两个豆种采用不同色调 */
-        .bean-card.arabica { border-color: var(--accent); } /* 金色强调 */
-        .bean-card.robusta { border-color: var(--parrot-green); } /* 鹦鹉绿强调 */
-        .bean-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(26, 67, 53, 0.08); }
-        .bean-icon { font-size: 4rem; margin-bottom: 25px; }
-        .arabica .bean-icon { color: var(--accent); }
-        .robusta .bean-icon { color: var(--parrot-green); }
-        .bean-card h4 { font-size: 2rem; margin-bottom: 15px; color: var(--primary); font-weight: 600; }
-        .bean-features { list-style: none; margin-top: 30px; text-align: left; }
-        .bean-features li { margin-bottom: 12px; border-bottom: 1px dashed #eee; padding-bottom: 12px; font-size: 0.95rem; }
-        .bean-features i { color: var(--accent); margin-right: 12px; width: 20px; text-align: center; }
-
-        /* === 3. 从树到杯的旅程 === */
-        .journey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 25px; text-align: center; }
-        .journey-step { position: relative; padding: 25px; }
-        .journey-icon {
-            width: 100px; height: 100px; margin: 0 auto 25px; background: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 2.5rem;
-            color: var(--primary); border: 2px solid #eae1d8; box-shadow: var(--card-shadow); transition: var(--transition);
-        }
-        /* 悬浮时变为鹦鹉绿高亮 */
-        .journey-step:hover .journey-icon { background: var(--parrot-green); color: white; border-color: var(--parrot-green); transform: scale(1.1); box-shadow: 0 10px 30px rgba(44,181,114,0.2); }
-        .journey-step h4 { color: var(--primary); margin-bottom: 12px; font-weight: 600; }
-        .journey-step p { font-size: 0.9rem; color: var(--text-muted); }
-
-        /* === 4. 冲煮指南 (保留优化) === */
-        .step-card {
-            display: flex; flex-direction: column; background: white; border-radius: 20px;
-            overflow: hidden; box-shadow: var(--card-shadow); margin-bottom: 40px; border: 1px solid rgba(212,175,55,0.05);
-        }
-        .art-box { width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; }
-        /* 使用丝滑的鹦鹉绿与墨绿渐变，营造轻奢绸缎质感 */
-        .art-1 { background: linear-gradient(135deg, #fdf8f0, #eae1d8); color: var(--primary); }
-        .art-2 { background: linear-gradient(135deg, #2CB572, #1A4335); color: white; }
-        .art-3 { background: linear-gradient(135deg, #1A4335, #0a1f18); color: var(--accent); }
-        .step-info { padding: 50px; }
-        .step-num { color: var(--accent); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; display: block; margin-bottom: 12px; }
-        .step-info h4 { font-size: 1.6rem; margin-bottom: 15px; color: var(--primary); font-weight: 600; }
-
-        /* 页脚 */
-        footer { background: var(--primary); color: rgba(255,255,255,0.7); padding: 80px 5% 40px; text-align: center; border-top: 4px solid var(--accent); } /* 深墨绿页脚，金色顶边 */
-        .footer-logo { color: white; font-size: 1.5rem; margin-bottom: 30px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .footer-logo i { color: var(--accent); }
+        
+        /* 装饰金线 */
+        .deco-line { height: 1px; width: 100px; background-color: var(--gold-accent); margin: 30px 0; }
 
         /* 按钮 */
-        .cta-btn {
-            display: inline-block; padding: 15px 45px; background: var(--parrot-green); color: white;
-            text-decoration: none; border-radius: 50px; margin-top: 30px; font-weight: 600; font-size: 0.95rem; letter-spacing: 1px;
-            transition: var(--transition); box-shadow: 0 10px 30px rgba(44,181,114,0.3);
+        .btn {
+            display: inline-flex; align-items: center; gap: 15px; padding: 15px 35px;
+            background: transparent; color: var(--text-main); border: 1px solid var(--text-main);
+            text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+            transition: var(--transition); position: relative; overflow: hidden;
         }
-        /* 悬浮时变为轻奢金色 */
-        .cta-btn:hover { background: var(--accent); transform: scale(1.05); box-shadow: 0 10px 30px rgba(212,175,55,0.3); }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--parrot-green); z-index: -1; transform: scaleX(0); transform-origin: right; transition: transform 0.5s ease;
+        }
+        .btn:hover { color: white; border-color: var(--parrot-green); }
+        .btn:hover::before { transform: scaleX(1); transform-origin: left; }
 
-        /* 桌面端适配 */
+        /* --- 通用 Section --- */
+        section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-subtitle { font-size: 0.8rem; color: var(--parrot-green); letter-spacing: 4px; text-transform: uppercase; display: block; margin-bottom: 15px; }
+        .section-title { font-size: 2.5rem; color: var(--text-main); }
+
+        /* --- 豆种学 (高级叠层卡片) --- */
+        .beans-grid { display: grid; grid-template-columns: 1fr; gap: 60px; }
+        .bean-card {
+            display: flex; flex-direction: column; background: var(--surface);
+            padding: 50px 40px; border: 1px solid rgba(197, 160, 89, 0.2); position: relative;
+        }
+        .bean-card::before {
+            content: ''; position: absolute; top: -10px; left: -10px; width: 40px; height: 40px;
+            border-top: 1px solid var(--gold-accent); border-left: 1px solid var(--gold-accent);
+        }
+        .bean-card::after {
+            content: ''; position: absolute; bottom: -10px; right: -10px; width: 40px; height: 40px;
+            border-bottom: 1px solid var(--gold-accent); border-right: 1px solid var(--gold-accent);
+        }
+        .bean-card h3 { font-size: 2rem; margin-bottom: 20px; color: var(--text-main); }
+        .bean-card .botanical-name { font-family: 'Montserrat', sans-serif; font-style: italic; color: var(--parrot-green); font-size: 0.9rem; margin-bottom: 30px; display: block; }
+        .feature-list { list-style: none; }
+        .feature-list li { padding: 15px 0; border-bottom: 1px solid rgba(26, 47, 36, 0.05); display: flex; justify-content: space-between; }
+        .feature-list span:first-child { color: var(--gold-accent); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* --- 冲煮艺术 (左右交替排版) --- */
+        .step-row { display: flex; flex-direction: column; gap: 40px; margin-bottom: 100px; align-items: center; }
+        .step-img-box { width: 100%; height: 400px; position: relative; }
+        .step-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .step-text { width: 100%; padding: 20px 0; }
+        .step-number { font-family: 'Noto Serif SC', serif; font-size: 4rem; color: rgba(44, 181, 114, 0.15); line-height: 1; margin-bottom: -20px; position: relative; z-index: 1; }
+        .step-text h3 { font-size: 1.8rem; margin-bottom: 20px; position: relative; z-index: 2; }
+        .step-text p { color: #4A5D53; font-size: 1rem; }
+
+        /* --- 页脚 --- */
+        footer { background: var(--text-main); color: var(--bg-color); padding: 80px 5% 40px; text-align: center; }
+        .footer-logo { font-family: 'Noto Serif SC', serif; font-size: 2rem; margin-bottom: 20px; }
+        .footer-logo span { color: var(--parrot-green); }
+
+        /* --- 桌面端适配 --- */
         @media (min-width: 900px) {
             .nav-links { display: flex; }
-            .timeline { padding-left: 0; border-left: none; }
-            .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: #eae1d8; transform: translateX(-50%); }
-            .timeline-item { display: flex; justify-content: flex-end; width: 50%; padding-right: 40px; margin-bottom: 30px; }
-            .timeline-item:nth-child(even) { align-self: flex-end; justify-content: flex-start; padding-right: 0; padding-left: 40px; margin-left: 50%; }
-            .timeline-icon { left: auto; right: -21px; width: 42px; height: 42px; }
-            .timeline-item:nth-child(even) .timeline-icon { right: auto; left: -21px; }
+            .hero-container { flex-direction: row; align-items: center; }
+            .hero-text { width: 50%; padding-right: 50px; margin-top: 0; }
+            .hero-img-wrapper { width: 50%; height: 70vh; margin-top: 0; position: absolute; right: 0; top: 10vh; }
             
-            .journey-grid { display: flex; justify-content: space-between; position: relative; }
-            .journey-step { flex: 1; }
-            /* 桌面端的金色连接箭头 */
-            .journey-step:not(:last-child)::after {
-                content: '\f178'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
-                position: absolute; right: -15px; top: 40px; font-size: 1.5rem; color: #f2e9de;
-            }
-
-            .step-card { flex-direction: row; align-items: stretch; height: 380px; }
-            .step-card:nth-child(even) { flex-direction: row-reverse; }
-            .art-box { width: 40%; height: auto; font-size: 7rem; }
-            .step-info { width: 60%; display: flex; flex-direction: column; justify-content: center; padding: 70px; }
+            .beans-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .bean-card { padding: 80px 60px; }
+            
+            .step-row { flex-direction: row; justify-content: space-between; gap: 80px; }
+            .step-row:nth-child(even) { flex-direction: row-reverse; }
+            .step-img-box { width: 50%; height: 500px; }
+            .step-text { width: 40%; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo"><i class="fas fa-leaf"></i> 萃取时光</div>
+    <nav id="navbar">
+        <div class="logo">BOTANY<span>.</span>COFFEE</div>
         <div class="nav-links">
-            <a href="#history">起源史</a>
-            <a href="#beans">豆种学</a>
-            <a href="#journey">生豆旅程</a>
-            <a href="#guide">冲煮法</a>
+            <a href="#origin">植物起源</a>
+            <a href="#beans">豆种分类</a>
+            <a href="#brew">萃取美学</a>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="hero-content">
-            <h2>咖啡植物学：从种子到杯子</h2>
-            <p>在这个快进的时代，我们用植物学的视角与三分钟的专注，<br>还原一颗咖啡樱桃最本质的地域风味。</p>
-            <a href="#history" class="cta-btn">开始探索旅程</a>
+        <div class="hero-container reveal">
+            <div class="hero-text">
+                <span class="section-subtitle">Botanical Extraction</span>
+                <h1>植物与水<i>的</i><br>萃取艺术</h1>
+                <div class="deco-line"></div>
+                <p>抛开工业化的喧嚣，用鹦鹉绿的清新与植物学的严谨，重新审视每一颗咖啡樱桃的生命轨迹。在静谧中，品味自然赋予的地域之味。</p>
+                <a href="#origin" class="btn">探索旅程 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Botanical Coffee" class="hero-img" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hero-img-fallback">Botanical Art</div>
+            </div>
         </div>
     </header>
 
-    <div class="container" id="history">
-        <div class="section-title">
-            <h3>咖啡的起源与传播简史</h3>
-            <div class="divider"></div>
-        </div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-icon"><i class="fas fa-search"></i></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">公元 9 世纪 | 埃塞俄比亚</span>
-                    <h4>卡尔迪的奇遇</h4>
-                    <p>传说牧羊人卡尔迪发现羊群吃了一种红色的神秘果实后变得异常兴奋。这便是人类与这一植物最原始的相遇，开启了咖啡的药用与饮用历史。</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-icon"><i class="fas fa-mortar-pestle"></i></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">公元 15 世纪 | 也门/也门</span>
-                    <h4>阿拉伯的烘焙智慧</h4>
-                    <p>咖啡传入阿拉伯半岛。也门人苏菲主义者开始将咖啡豆进行烘焙、磨粉并用水熬煮，世界上第一杯真正意义上的热咖啡饮品诞生，并迅速风靡。</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-icon"><i class="fas fa-globe"></i></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">公元 17-19 世纪 | 全球</span>
-                    <h4>大航海与殖民传播</h4>
-                    <p>通过西方商人的贸易与殖民扩张，咖啡树从阿拉伯半岛传播至欧洲，随后被种植到中南美洲（如巴西）和亚洲（如爪哇），成为了风靡全球的商业作物。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" id="beans" style="background-color: white; padding: 80px 5%; border-radius: 30px; box-shadow: var(--card-shadow); border: 1px solid rgba(212,175,55,0.08);">
-        <div class="section-title">
-            <h3>核心豆种植物学对比</h3>
-            <div class="divider"></div>
-            <p style="color: var(--text-muted); margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">全球商业咖啡市场主要由阿拉比卡和罗布斯塔两大品种占据，它们在植物学特征上截然不同。</p>
+    <section id="beans">
+        <div class="section-header reveal">
+            <span class="section-subtitle">Coffea Genus</span>
+            <h2 class="section-title">核心豆种植物学</h2>
         </div>
         <div class="beans-grid">
-            <div class="bean-card arabica">
-                <div class="bean-icon"><i class="fas fa-ribbon"></i></div> <h4>阿拉比卡 (Arabica)</h4>
-                <p style="color: var(--text-muted);">精品咖啡的代名词。风味精致多变，如花香、果酸，娇贵但迷人。占据全球 60%+产量。</p>
-                <ul class="bean-features">
-                    <li><i class="fas fa-certificate"></i> <strong>风味：</strong> 花香、果酸、焦糖、坚果，层次极丰</li>
-                    <li><i class="fas fa-vial"></i> <strong>咖啡因：</strong> 较低（约 0.9% - 1.2%）</li>
-                    <li><i class="fas fa-mountain-sun"></i> <strong>种植：</strong> 高海拔 (800-2000m)，需精心照料</li>
-                    <li><i class="fas fa-seedling"></i> <strong>外观：</strong> 豆型扁平修长，S型中线</li>
+            <div class="bean-card reveal">
+                <h3>阿拉比卡</h3>
+                <span class="botanical-name">Coffea arabica L.</span>
+                <p style="margin-bottom: 30px; font-size: 0.95rem; color: #4A5D53;">被誉为精品咖啡的皇冠。生长在凉爽的高海拔地带，拥有优雅复杂的芳香化合物，是探寻地域风味（Terroir）的唯一选择。</p>
+                <ul class="feature-list">
+                    <li><span>风味特征</span> <span>花香 / 浆果 / 焦糖</span></li>
+                    <li><span>种植海拔</span> <span>800m - 2000m+</span></li>
+                    <li><span>咖啡因含量</span> <span>约 0.9% - 1.2%</span></li>
                 </ul>
             </div>
-            <div class="bean-card robusta">
-                <div class="bean-icon"><i class="fas fa-shield-heart"></i></div> <h4>罗布斯塔 (Robusta)</h4>
-                <p style="color: var(--text-muted);">意式拼配与速溶咖啡的基础。生命力顽强，苦味重、醇厚度高、油脂丰厚。占据全球约 40%产量。</p>
-                <ul class="bean-features">
-                    <li><i class="fas fa-certificate"></i> <strong>风味：</strong> 麦片、橡胶、木质、苦味，风味单一醇厚</li>
-                    <li><i class="fas fa-vial"></i> <strong>咖啡因：</strong> 极高（约 1.6% - 2.4%）</li>
-                    <li><i class="fas fa-seedling"></i> <strong>种植：</strong> 低海拔 (0-800m)，抗病虫害极强</li>
-                    <li><i class="fas fa-seedling"></i> <strong>外观：</strong> 豆型圆润，直式中线</li>
+            <div class="bean-card reveal" style="transform: translateY(30px);">
+                <h3>罗布斯塔</h3>
+                <span class="botanical-name">Coffea canephora</span>
+                <p style="margin-bottom: 30px; font-size: 0.95rem; color: #4A5D53;">展现出植物极强的生命张力。抗病虫害能力极强，提供醇厚的油脂与扎实的口感，是意式浓缩咖啡中不可或缺的骨架。</p>
+                <ul class="feature-list">
+                    <li><span>风味特征</span> <span>黑巧克力 / 木质 / 坚果</span></li>
+                    <li><span>种植海拔</span> <span>0 - 800m</span></li>
+                    <li><span>咖啡因含量</span> <span>约 1.6% - 2.4%</span></li>
                 </ul>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container" id="journey">
-        <div class="section-title">
-            <h3>一粒豆的植物学奇妙旅程</h3>
-            <div class="divider"></div>
+    <section id="brew">
+        <div class="section-header reveal">
+            <span class="section-subtitle">The Ritual</span>
+            <h2 class="section-title">轻奢手冲萃取法</h2>
         </div>
-        <div class="journey-grid">
-            <div class="journey-step">
-                <div class="journey-icon"><i class="fas fa-tree"></i></div>
-                <h4>1. 种植培育</h4>
-                <p>咖啡树（Rubiaceae 茜草科）需 3-4 年开花结果。</p>
-            </div>
-            <div class="journey-step">
-                <div class="journey-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                <h4>2. 手工采摘</h4>
-                <p>只有完全熟成的深红色咖啡樱桃才会被人工采摘。</p>
-            </div>
-            <div class="journey-step">
-                <div class="journey-icon"><i class="fas fa-vials"></i></div>
-                <h4>3. 生豆处理</h4>
-                <p>通过日晒、水洗或蜜处理，干燥并分离出咖啡种子。</p>
-            </div>
-            <div class="journey-step">
-                <div class="journey-icon"><i class="fas fa-fire"></i></div>
-                <h4>4. 高温烘焙</h4>
-                <p>高温引发复杂化学反应，唤醒沉睡的植物风味。</p>
-            </div>
-            <div class="journey-step">
-                <div class="journey-icon"><i class="fas fa-filter"></i></div>
-                <h4>5. 精致萃取</h4>
-                <p>最后通过热水，将这颗种子的精华溶解入 cup 中。</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="container" id="guide">
-        <div class="section-title">
-            <h3>轻奢植物学：手冲冲煮法</h3>
-            <div class="divider"></div>
-            <p style="color: var(--text-muted); margin-top: 15px;">这一套流程能够最全面地展现一粒优质阿拉比卡豆的地域风味特征。</p>
-        </div>
-        
-        <div class="step-card">
-            <div class="art-box art-1"><i class="fas fa-scale-unbalanced"></i></div>
-            <div class="step-info">
-                <span class="step-num">STEP 01 | 准备与研磨</span>
-                <h4>1:15 比例与中研磨</h4>
-                <p>准备 20g 咖啡粉（推荐阿拉比卡精品豆）。使用中等研磨（如粗砂糖大小）。注入热水浸湿滤纸，去除纸味的同时预热滤杯和分享壶，确保萃取水温稳健。</p>
+        <div class="step-row reveal">
+            <div class="step-img-box">
+                <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Grinding" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hero-img-fallback">Step 01</div>
+            </div>
+            <div class="step-text">
+                <div class="step-number">01</div>
+                <h3>粉水比例与研磨度</h3>
+                <p>科学的萃取始于严谨的计量。我们推荐使用 <strong>1:15</strong> 的黄金粉水比（20g 咖啡粉注入 300g 热水）。采用中等研磨度（类似粗海盐颗粒），以确保芳香物质的均匀析出，避免过度萃取带来的苦涩。</p>
             </div>
         </div>
 
-        <div class="step-card">
-            <div class="art-box art-2"><i class="fas fa-heart-pulse"></i></div>
-            <div class="step-info">
-                <span class="step-num">STEP 02 | 植物化学反应</span>
-                <h4>30秒的“焖蒸”预浸泡</h4>
-                <p>使用 90°C - 92°C 纯净水。轻柔注入 40g 水完全打湿粉床。静置 30 秒，这是咖啡粉释放二氧化碳气体（汉堡般隆起）、预唤醒内部风味化合物的关键一刻。</p>
+        <div class="step-row reveal">
+            <div class="step-img-box">
+                <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Blooming" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hero-img-fallback">Step 02</div>
+            </div>
+            <div class="step-text">
+                <div class="step-number">02</div>
+                <h3>奇妙的植物学焖蒸</h3>
+                <p>使用 90°C 的热水，以画圈方式注入 40g 水打湿粉床。此时静置 30 秒，你将观察到粉床如生命般膨胀——这是烘焙过程中锁在细胞壁内的二氧化碳被释放的过程，为后续深层风味的萃取打下基础。</p>
             </div>
         </div>
 
-        <div class="step-card">
-            <div class="art-box art-3"><i class="fas fa-hourglass-end"></i></div>
-            <div class="step-info">
-                <span class="step-num">STEP 03 | 精准分段萃取</span>
-                <h4>由内向外的平稳绕圈</h4>
-                <p>保持水流纤细垂直。分两次注水至总重 300g。第一次至 200g 后观察水位下降，再补至 300g。在 2分30秒内完成萃取，移除滤杯，轻轻摇晃分享壶，享受此刻的植物芬芳。</p>
+        <div class="step-row reveal">
+            <div class="step-img-box">
+                <img src="https://images.unsplash.com/photo-1544787210-2281404099d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Pouring" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hero-img-fallback">Step 03</div>
+            </div>
+            <div class="step-text">
+                <div class="step-number">03</div>
+                <h3>水流的韵律与萃取</h3>
+                <p>保持水流纤细、垂直且稳定，由中心向外画同心圆。分两段将水注满至 300g。整个过程应在 2分30秒内完成。当滤杯中的水流尽，轻摇分享壶，一杯充满明亮酸质与馥郁花香的单品咖啡便诞生了。</p>
             </div>
         </div>
-    </div>
+    </section>
 
     <footer>
-        <div class="footer-logo"><i class="fas fa-seedling"></i> 萃取时光 | 精品咖啡植物学</div>
-        <p>纯代码构建 | 探索从种子到杯子的美学</p>
-        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.5;">© 2026 Crafted with Soft Luxury Botanical style.</p>
+        <div class="footer-logo">BOTANY<span>.</span>COFFEE</div>
+        <p style="font-size: 0.9rem; letter-spacing: 1px; color: rgba(255,255,255,0.6);">探索植物、时间与水的奇妙交融</p>
+        <p style="margin-top: 40px; font-size: 0.75rem; color: rgba(255,255,255,0.3);">© 2026 Crafted with Soft Luxury Botanical style.</p>
     </footer>
 
+    <script>
+        // 导航栏滚动变色
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 滚动浮现动效 (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // 触发一次后取消观察
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15, // 元素露出 15% 时触发
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
 </body>
 </html>
